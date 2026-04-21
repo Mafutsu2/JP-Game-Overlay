@@ -1,0 +1,25 @@
+{
+  "name": "Game Overlay",
+  "version": "1.0.0",
+  "description": "ocr",
+  "license": "ISC",
+  "author": "mafutsu",
+  "type": "module",
+  "main": "main.js",
+  "scripts": {
+    "prestart": "npx @tailwindcss/cli -i ./view/styles.css -o ./view/stylesTW.css",
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "electron": "^40.2.1"
+  },
+  "dependencies": {
+    "@tailwindcss/cli": "^4.2.2",
+    "get-windows": "^9.3.0",
+    "node-screenshots": "^0.2.8",
+    "tailwindcss": "^4.2.2",
+    "tree-kill": "^1.2.2",
+    "ws": "^8.19.0"
+  }
+}

@@ -1,0 +1,8 @@
+./node_modules
+./ocr/build
+./ocr/dist
+./ocr/venv
+./ocr/ocr.iml
+./ocr/ocr.spec
+./screenshots
+./view/stylesTW.css

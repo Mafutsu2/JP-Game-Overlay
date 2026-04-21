@@ -1,0 +1,6 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: Roboto;
+  src: url("../font/Roboto-Regular.ttf") format("truetype");
+}

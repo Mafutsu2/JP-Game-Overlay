@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8"/>
+  <title>OCR</title>
+  <style>
+    @font-face {
+      font-family: SourceHanSans;
+      src: url("../font/SourceHanSans-Regular.otf") format("opentype");
+    }
+
+    body {
+      font-family: SourceHanSans;
+      font-feature-settings: "fwid";
+      font-size: 20px;
+      color: white;
+      background-color: #FFFFFF00;
+      transition: background-color 0.1s ease-out;
+    }
+
+    #container > div {
+      overflow: hidden;
+      white-space: nowrap;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: rgba(255, 0, 0, 1);
+    }
+  </style>
+</head>
+<body>
+<div id="container"></div>
+<script src="./renderer.js"></script>
+<script>
+  let popupNb = 0;
+  window.addEventListener('yomitan-popup-shown', () => {
+    if (popupNb === 0)
+      window.electronAPI.popupChange(true);
+    popupNb++;
+  });
+  window.addEventListener('yomitan-popup-hidden', () => {
+    if (popupNb === 1)
+      window.electronAPI.popupChange(false);
+    popupNb = popupNb > 1 ? popupNb - 1 : 0;
+  });
+</script>
+</body>
+</html>
