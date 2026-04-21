@@ -10,3 +10,5 @@ dictionary.
 
 - [meikiocr](https://github.com/rtr46/meikiocr)
 - [Yomitan](https://github.com/yomidevs/yomitan)
+
+https://github.com/user-attachments/assets/97a1eac8-fdd1-4c07-a8ca-04216c6ad961
