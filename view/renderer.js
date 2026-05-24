@@ -1,3 +1,19 @@
+window.electronAPI.onUpdateOptions((options) => {
+  selectedWindow = options.window;
+  document.getElementById('window').innerText = options.window.title;
+  document.getElementById('fake-height').innerText = options.window.title;
+  document.getElementById('delay').value = options.delay;
+  document.getElementById('yomitan-hotkey').value = formatHotkey(options.yomitanHotkey);
+  document.getElementById('exit-hotkey').value = formatHotkey(options.exitHotkey);
+  document.getElementById('activation-hotkey').value = formatHotkey(options.activationHotkey);
+  selectedActivation = activationTypes.find(t => t.id === options.activation);
+  document.getElementById('activation-type').innerText = selectedActivation.title;
+});
+
+const formatHotkey = (hotkey) => {
+  return hotkey.replaceAll('+', ' + ');
+};
+
 window.electronAPI.onUpdateWindows((allWindows) => {
   let options = document.getElementById('window-options');
   options.innerHTML = '';

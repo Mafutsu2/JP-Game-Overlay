@@ -8,6 +8,7 @@ import kill from 'tree-kill';
 import { openWindows } from 'get-windows';
 import { Window } from 'node-screenshots';
 import { openYomitanSettings } from './yomitan.js';
+import * as constants from './constants.js';
 
 const overlay = (appPath, options, yomitanId, originalWin) => {
   let win = null;
@@ -23,22 +24,27 @@ const overlay = (appPath, options, yomitanId, originalWin) => {
   let closeOverlayInterval = null;
 
   const registerShortcuts = () => {
-    if (options.openTypeId != 0 && !globalShortcut.isRegistered('`'))
-      globalShortcut.register('`', () => onOpenOverlay());
-    if (!globalShortcut.isRegistered('Alt+Shift+Q'))
-      globalShortcut.register('Alt+Shift+Q', () => win.close());
-    if (!globalShortcut.isRegistered('Alt+Shift+Y'))
-      globalShortcut.register('Alt+Shift+Y', () => openYomitanSettings(yomitanId));
+    if (options.activation !== constants.ALWAYS && !globalShortcut.isRegistered(options.activationHotkey))
+      globalShortcut.register(options.activationHotkey, () => onOpenOverlay());
+    if (!globalShortcut.isRegistered(options.exitHotkey))
+      globalShortcut.register(options.exitHotkey, () => win.close());
+    if (!globalShortcut.isRegistered(options.yomitanHotkey))
+      globalShortcut.register(options.yomitanHotkey, () => openYomitanSettings(yomitanId));
   };
 
   const unregisterShortcuts = () => {
-    globalShortcut.unregister('`');
-    globalShortcut.unregister('Alt+Shift+Q');
-    globalShortcut.unregister('Alt+Shift+Y');
+    try {
+      globalShortcut.unregister(options.activationHotkey);
+      globalShortcut.unregister(options.exitHotkey);
+      globalShortcut.unregister(options.yomitanHotkey);
+    } catch (e) {
+      console.error(e);
+      globalShortcut.unregisterAll();
+    }
   };
 
   const onOpenOverlay = () => {
-    if (options.openTypeId === 1) {// on toggle
+    if (options.activation === constants.TOGGLE) {
       if (win.isMinimized()) {
         win.restore();
         win.webContents.send('state-changed', true);
@@ -47,7 +53,7 @@ const overlay = (appPath, options, yomitanId, originalWin) => {
         setTimeout(() => win.minimize(), 120);
         win.minimize();
       }
-    } else if (options.openTypeId === 2) {// on hold
+    } else if (options.activation === constants.HOLD) {
       if (win.isMinimized()) {
         win.restore();
         win.webContents.send('state-changed', true);
@@ -76,7 +82,7 @@ const overlay = (appPath, options, yomitanId, originalWin) => {
       return;
 
     const allWindows = await openWindows();
-    const newWindowBounds = allWindows.find(w => w.id === options.windowId)?.contentBounds;
+    const newWindowBounds = allWindows.find(w => w.id === options.window.id)?.contentBounds;
     if (!newWindowBounds) {
       win.close();
       return;
@@ -114,10 +120,10 @@ const overlay = (appPath, options, yomitanId, originalWin) => {
 
   const updateWindowVisibility = (allWindows) => {
     //main window is in front and not minimized
-    if (allWindows[1].id === options.windowId && windowBounds.width !== 0 && windowBounds.height !== 0) {
+    if (allWindows[1].id === options.window.id && windowBounds.width !== 0 && windowBounds.height !== 0) {
       if (!isMainWindowOpen) {
         isMainWindowOpen = true;
-        if (options.openTypeId === 0 && win.isMinimized())
+        if (options.activation === constants.ALWAYS && win.isMinimized())
           win.restore();
         registerShortcuts();
         overlayInterval = setInterval(() => {
@@ -141,7 +147,7 @@ const overlay = (appPath, options, yomitanId, originalWin) => {
   const makeScreenshot = (screenshotPath) => {
     let windows = Window.all();
     windows.forEach((item) => {
-      if (item.id() === options.windowId && item.width() > 0 && item.height() > 0) {
+      if (item.id() === options.window.id && item.width() > 0 && item.height() > 0) {
         let image = item.captureImageSync();
         fs.writeFile(screenshotPath, image.toPngSync(), (err) => {
           if (err) {
@@ -216,16 +222,16 @@ const overlay = (appPath, options, yomitanId, originalWin) => {
     show: false,
     webPreferences: {
       preload: path.join(appPath, 'preload.js'),
-      additionalArguments: [ '' + options.openTypeId ],
+      additionalArguments: [ '' + options.activation ],
     }
   });
   //win.webContents.openDevTools();
   win.loadFile('./view/overlay.html');
   win.setAlwaysOnTop(true, 'screen-saver');
-  win.setIgnoreMouseEvents(options.openTypeId === 0, { forward: options.openTypeId === 0 });
+  win.setIgnoreMouseEvents(options.activation === constants.ALWAYS, { forward: options.activation === constants.ALWAYS });
 
   const popupChangeHandler = (event, isShown) => {
-    if (options.openTypeId === 0)
+    if (options.activation === constants.ALWAYS)
       win.setIgnoreMouseEvents(!isShown, { forward: !isShown });
   };
   ipcMain.on('popup-change', popupChangeHandler);
@@ -251,7 +257,7 @@ const overlay = (appPath, options, yomitanId, originalWin) => {
   });
   win.once('show', async () => {
     console.log('show');
-    if (options.openTypeId !== 0) {
+    if (options.activation !== constants.ALWAYS) {
       win.minimize();
     }
   });
