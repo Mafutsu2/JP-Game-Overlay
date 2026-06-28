@@ -60,6 +60,8 @@ window.electronAPI.onUpdateText((json) => {
 });
 
 window.electronAPI.onStateChanged((isVisible) => {
+  if (!isVisible)
+    window.postMessage({ action: 'yomitan-hide-popup' }, '*');
   document.getElementsByTagName('body')[0].style.backgroundColor = isVisible ? '#FFFFFF22' : '#FFFFFF00';
 });
 

@@ -52,6 +52,19 @@ _onVisibleChange({ value })
 
 -----
 
+### To be able to close popups manually
+
+**`yomitan/js/app/popup-factory.js`** **`line 40`**
+
+```js
+window.addEventListener('message', async (event) => {
+  if (event.data?.action === 'yomitan-hide-popup')
+    this._popups.forEach((value, key, map) => value.hide(false));
+});
+```
+
+-----
+
 ### To change default theme to Dark + [Glassy](https://github.com/cakiya/yomitan-glass-theme)
 
 **`yomitan/data/schemas/options-schema.json`** **`line 255`**
