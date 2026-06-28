@@ -52,7 +52,7 @@
             <div class="w-0.5 h-0.5"></div>
             <div class="flex flex-col relative">
                 <div class="flex flex-nowrap rounded-b-md overflow-hidden z-10">
-                    <input class="flex-initial text-center font-['Roboto'] text-base text-text border-0 transition-colors flex items-center w-36 px-5 py-1 bg-primary hover:bg-hover focus:outline-none" id="activation-hotkey" type="text" value="">
+                    <input class="flex-initial text-center font-['Roboto'] text-base text-text border-0 transition-colors flex items-center w-36 px-5 py-1 bg-primary hover:bg-hover disabled:bg-primary disabled:line-through focus:outline-none" id="activation-hotkey" type="text" value="">
                     <div class="w-0.5 h-0.5"></div>
                     <div class="flex-initial w-36 flex justify-center items-center px-5 py-1 bg-primary cursor-pointer transition-colors hover:bg-hover active:bg-active" id="activation-type"></div>
                     <div class="w-0.5 h-0.5"></div>
@@ -90,6 +90,7 @@
       div.addEventListener('click', (event) => {
         selectedActivation = t;
         document.getElementById('activation-type').innerText = t.title;
+        document.getElementById('activation-hotkey').disabled = t.id === 0;
       });
       div.className = 'px-5 py-1 rounded text-sm cursor-pointer hover:bg-hover active:bg-active';
       div.innerText = t.title;
