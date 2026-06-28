@@ -22,6 +22,11 @@ const overlay = (appPath, options, yomitanId, originalWin) => {
   let windowBoundsInterval = null;
   let overlayInterval = null;
   let closeOverlayInterval = null;
+  const dirPath = path.join(appPath, 'screenshots');
+  const screenshotPath = path.join(dirPath, 'window.png');
+
+  if (!fs.existsSync(dirPath))
+    fs.mkdirSync(dirPath);
 
   const registerShortcuts = () => {
     if (options.activation !== constants.ALWAYS && !globalShortcut.isRegistered(options.activationHotkey))
@@ -127,8 +132,7 @@ const overlay = (appPath, options, yomitanId, originalWin) => {
           win.restore();
         registerShortcuts();
         overlayInterval = setInterval(() => {
-          const screenshotPath = path.join(appPath, 'screenshots', 'window.png');
-          makeScreenshot(screenshotPath);
+          makeScreenshot();
         }, options.delay * 1000);
       }
     } else {
@@ -144,7 +148,7 @@ const overlay = (appPath, options, yomitanId, originalWin) => {
     }
   };
 
-  const makeScreenshot = (screenshotPath) => {
+  const makeScreenshot = () => {
     let windows = Window.all();
     windows.forEach((item) => {
       if (item.id() === options.window.id && item.width() > 0 && item.height() > 0) {
