@@ -1,6 +1,18 @@
 @import "tailwindcss";
 
+:root {
+    color-scheme: dark;
+}
+
+@theme {
+    --color-bg-color: #323232;
+    --color-primary: #232323;
+    --color-hover: #423a83;
+    --color-active: #585191;
+    --color-text: #e6e6e6;
+}
+
 @font-face {
-  font-family: Roboto;
-  src: url("../font/Roboto-Regular.ttf") format("truetype");
+    font-family: Roboto;
+    src: url("../font/Roboto-Regular.ttf") format("truetype");
 }
