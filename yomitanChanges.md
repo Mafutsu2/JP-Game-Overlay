@@ -76,3 +76,62 @@ _onVisibleChange({ value })
 "default": "iframe.yomitan-popup[data-theme=\"light\"] {\n    color-scheme: light !important; /* forces light theme so it works on google.com*/\n    --outer-bg: rgba(210, 210, 215, 0.85);\n    --outer-border: rgba(0, 0, 0, 0.2);\n}\n\niframe.yomitan-popup[data-theme=\"dark\"] {\n    color-scheme: dark !important; /* forces dark theme so it works on google.com*/\n    --outer-bg: rgba(45, 45, 50, 0.85);\n    --outer-border: rgba(255, 255, 255, 0.2);\n}\n\niframe.yomitan-popup {\n    background: var(--outer-bg) !important;\n    backdrop-filter: blur(1px) !important;\n    -webkit-backdrop-filter: blur(1px) !important;\n    border-radius: 12px !important;\n    border: 1px solid var(--outer-border) !important;\n    /* forced-color-adjust: none !important; */\n\n    /* hide scrollbar */\n    scrollbar-width: none !important; /* Firefox */\n    -ms-overflow-style: none !important; /* IE, Edge (legacy) */\n}"
 },
 ```
+
+-----
+
+### Other default option changes
+
+**`yomitan/data/schemas/options-schema.json`**
+
+**`line 172`** show advanced options
+
+```json
+{
+  "showAdvanced": {
+    "type": "boolean",
+    "default": true
+  }
+}
+```
+
+**`line 516`** set scanning modifier key from "Shift" to "No key"
+
+```json
+{
+  "include": ""
+}
+```
+
+**`line 754`** don't scan alphanumeric characters
+
+```json
+{
+  "alphanumeric": {
+    "type": "boolean",
+    "default": false
+  }
+}
+```
+
+**`line 758`** hide popup automatically
+
+```json
+{
+  "autoHideResults": {
+    "type": "boolean",
+    "default": true
+  }
+}
+```
+
+**`line 768`** close popup after 50ms delay
+
+```json
+{
+  "hideDelay": {
+    "type": "number",
+    "minimum": 0,
+    "default": 50
+  }
+}
+```

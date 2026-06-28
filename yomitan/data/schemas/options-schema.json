@@ -169,7 +169,7 @@
                                     },
                                     "showAdvanced": {
                                         "type": "boolean",
-                                        "default": false
+                                        "default": true
                                     },
                                     "showDebug": {
                                         "type": "boolean",
@@ -513,7 +513,7 @@
                                         "type": "array",
                                         "default": [
                                             {
-                                                "include": "shift",
+                                                "include": "",
                                                 "exclude": "mouse0",
                                                 "types": {
                                                     "mouse": true,
@@ -751,11 +751,11 @@
                                     },
                                     "alphanumeric": {
                                         "type": "boolean",
-                                        "default": true
+                                        "default": false
                                     },
                                     "autoHideResults": {
                                         "type": "boolean",
-                                        "default": false
+                                        "default": true
                                     },
                                     "delay": {
                                         "type": "number",
@@ -765,7 +765,7 @@
                                     "hideDelay": {
                                         "type": "number",
                                         "minimum": 0,
-                                        "default": 0
+                                        "default": 50
                                     },
                                     "length": {
                                         "type": "integer",
