@@ -6,3 +6,6 @@
 ./ocr/ocr.spec
 ./screenshots
 ./view/stylesTW.css
+./package-lock.json
+
+out/
