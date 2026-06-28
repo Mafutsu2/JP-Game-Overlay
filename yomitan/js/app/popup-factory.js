@@ -37,6 +37,10 @@ export class PopupFactory {
         this._frameOffsetForwarder = new FrameOffsetForwarder(application.crossFrame);
         /** @type {Map<string, import('popup').PopupAny>} */
         this._popups = new Map();
+        window.addEventListener('message', async (event) => {
+            if (event.data?.action === 'yomitan-hide-popup')
+                this._popups.forEach((value, key, map) => value.hide(false));
+        });
         /** @type {Map<string, {popup: import('popup').PopupAny, token: string}[]>} */
         this._allPopupVisibilityTokenMap = new Map();
     }
