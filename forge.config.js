@@ -4,6 +4,7 @@ import { FuseV1Options, FuseVersion } from '@electron/fuses';
 export default {
   packagerConfig: {
     asar: true,
+    extraResource: [ 'ocr/dist/ocr.exe', 'yomitan' ]
   },
   rebuildConfig: {},
   makers: [
