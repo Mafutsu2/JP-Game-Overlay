@@ -1,4 +1,4 @@
-import { BrowserWindow, globalShortcut, ipcMain } from 'electron';
+import { app, BrowserWindow, globalShortcut, ipcMain } from 'electron';
 import fs from 'fs';
 import path from 'path';
 import { spawn } from 'child_process';
@@ -22,7 +22,7 @@ const overlay = (appPath, options, yomitanId, originalWin) => {
   let windowBoundsInterval = null;
   let overlayInterval = null;
   let closeOverlayInterval = null;
-  const dirPath = path.join(appPath, 'screenshots');
+  const dirPath = app.isPackaged ? path.join(process.resourcesPath, 'screenshots') : path.join(appPath, 'screenshots');
   const screenshotPath = path.join(dirPath, 'window.png');
 
   if (!fs.existsSync(dirPath))
@@ -169,7 +169,7 @@ const overlay = (appPath, options, yomitanId, originalWin) => {
 
   const initPythonScript = () => {
     isInitializing = true;
-    child = spawn("./ocr/dist/ocr.exe");
+    child = spawn(app.isPackaged ? path.join(process.resourcesPath, 'ocr.exe') : path.join(appPath, 'ocr', 'dist', 'ocr.exe'));
 
     child.stdout.on('data', (data) => {
       let output = data?.toString()?.split(':');

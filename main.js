@@ -42,7 +42,7 @@ const start = async () => {
     ipcMain.on('open-yomitan', (event) => openYomitanSettings(yomitanId));
 
     const ses = win.webContents.session;
-    ses.extensions.loadExtension(app.getAppPath() + '\\yomitan', { allowFileAccess: true }).then(({ id }) => {
+    ses.extensions.loadExtension(app.isPackaged ? path.join(process.resourcesPath, 'yomitan') : path.join(app.getAppPath(), 'yomitan'), { allowFileAccess: true }).then(({ id }) => {
       yomitanId = id;
       console.log('Yomitan loaded');
     });
