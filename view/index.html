@@ -1,76 +1,76 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8"/>
-    <link href="stylesTW.css" rel="stylesheet">
-    <title>Game Overlay</title>
+  <meta charset="UTF-8"/>
+  <link href="stylesTW.css" rel="stylesheet">
+  <title>JP Game Overlay</title>
 </head>
 <body class="m-0 h-screen font-['Roboto'] text-base text-text bg-bg-color overflow-y-scroll">
 <div class="flex flex-col justify-center items-center p-5">
-    <div class="relative flex flex-col mb-2.5">
-        <div class="flex flex-nowrap rounded-md overflow-hidden cursor-default z-10">
-            <div class="flex items-center px-5 py-1 bg-primary">Window to overlay</div>
-            <div class="w-0.5 h-0.5"></div>
-            <div class="flex items-center px-5 py-1 bg-primary cursor-pointer transition-colors hover:bg-hover active:bg-active" id="window"></div>
-            <div class="w-0.5 h-0.5"></div>
-            <img alt="refresh" class="flex items-center p-1 cursor-pointer transition-colors bg-primary hover:bg-hover active:bg-active" id="refresh" src="./refresh_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg"/>
+  <div class="relative flex flex-col mb-2.5">
+    <div class="flex flex-nowrap rounded-md overflow-hidden cursor-default z-10">
+      <div class="flex items-center px-5 py-1 bg-primary">Window to overlay</div>
+      <div class="w-0.5 h-0.5"></div>
+      <div class="flex items-center px-5 py-1 bg-primary cursor-pointer transition-colors hover:bg-hover active:bg-active" id="window"></div>
+      <div class="w-0.5 h-0.5"></div>
+      <img alt="refresh" class="flex items-center p-1 cursor-pointer transition-colors bg-primary hover:bg-hover active:bg-active" id="refresh" src="./refresh_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg"/>
+    </div>
+    <div class="absolute w-full">
+      <div class="relative invisible min-h-6 flex items-center px-5 py-1" id="fake-height"></div>
+      <div class="relative top-0.5 right-0 flex flex-col py-2.5 rounded-md bg-primary z-30" id="window-options" style="display: none">
+      </div>
+    </div>
+  </div>
+  <div class="flex flex-col mb-2.5">
+    <div class="flex flex-nowrap rounded-md overflow-hidden cursor-default">
+      <div class="flex items-center px-5 py-1 bg-primary">Delay between screenshots</div>
+      <div class="w-0.5 h-0.5"></div>
+      <input class="text-center font-['Roboto'] text-base text-text border-0 transition-colors flex items-center w-16 px-5 py-1 bg-primary hover:bg-hover focus:outline-none" id="delay" type="text" value="">
+      <div class="w-0.5 h-0.5"></div>
+      <div class="flex items-center px-5 py-1 bg-primary">s</div>
+    </div>
+  </div>
+  <div class="flex flex-col mb-2.5">
+    <div class="flex flex-col flex-nowrap cursor-default">
+      <div class="flex flex-auto justify-center items-center px-5 py-1 bg-primary rounded-t-md">Overlay shortcuts</div>
+      <div class="w-0.5 h-0.5"></div>
+      <div class="flex flex-nowrap">
+        <input class="flex-initial text-center font-['Roboto'] text-base text-text border-0 transition-colors flex items-center w-36 px-5 py-1 bg-primary hover:bg-hover focus:outline-none" id="yomitan-hotkey" type="text" value="">
+        <div class="w-0.5 h-0.5"></div>
+        <div class="flex flex-auto items-center px-5 py-1 bg-primary">Open Yomitan settings</div>
+        <div class="w-0.5 h-0.5"></div>
+        <div class="flex justify-center items-center p-1 cursor-pointer filter-none transition-colors transition-[filter] bg-primary hover:brightness-125 hover:bg-hover" id="open-yomitan">
+          <img alt="yomitan settings" class="w-6 h-6" src="../yomitan/images/icon32.png"/>
+        </div>
+      </div>
+      <div class="w-0.5 h-0.5"></div>
+      <div class="flex flex-nowrap">
+        <input class="flex-initial text-center font-['Roboto'] text-base text-text border-0 transition-colors flex items-center w-36 px-5 py-1 bg-primary hover:bg-hover focus:outline-none" id="exit-hotkey" type="text" value="">
+        <div class="w-0.5 h-0.5"></div>
+        <div class="flex flex-auto items-center px-5 py-1 bg-primary">Close overlay</div>
+      </div>
+      <div class="w-0.5 h-0.5"></div>
+      <div class="flex flex-col relative">
+        <div class="flex flex-nowrap rounded-b-md overflow-hidden z-10">
+          <input class="flex-initial text-center font-['Roboto'] text-base text-text border-0 transition-colors flex items-center w-36 px-5 py-1 bg-primary hover:bg-hover disabled:bg-primary disabled:line-through focus:outline-none" id="activation-hotkey" type="text" value="">
+          <div class="w-0.5 h-0.5"></div>
+          <div class="flex-initial w-36 flex justify-center items-center px-5 py-1 bg-primary cursor-pointer transition-colors hover:bg-hover active:bg-active" id="activation-type"></div>
+          <div class="w-0.5 h-0.5"></div>
+          <div class="flex-auto flex items-center px-5 py-1 bg-primary">to show overlay</div>
         </div>
         <div class="absolute w-full">
-            <div class="relative invisible min-h-6 flex items-center px-5 py-1" id="fake-height"></div>
-            <div class="relative top-0.5 right-0 flex flex-col py-2.5 rounded-md bg-primary z-30" id="window-options" style="display: none">
-            </div>
+          <div class="relative invisible min-h-6 flex items-center px-5 py-1">i</div>
+          <div class="relative top-0.5 left-0 flex flex-col py-2.5 rounded-md bg-primary z-20" id="activation-options" style="display: none">
+          </div>
         </div>
+      </div>
     </div>
-    <div class="flex flex-col mb-2.5">
-        <div class="flex flex-nowrap rounded-md overflow-hidden cursor-default">
-            <div class="flex items-center px-5 py-1 bg-primary">Delay between screenshots</div>
-            <div class="w-0.5 h-0.5"></div>
-            <input class="text-center font-['Roboto'] text-base text-text border-0 transition-colors flex items-center w-16 px-5 py-1 bg-primary hover:bg-hover focus:outline-none" id="delay" type="text" value="">
-            <div class="w-0.5 h-0.5"></div>
-            <div class="flex items-center px-5 py-1 bg-primary">s</div>
-        </div>
+  </div>
+  <div class="flex flex-col mb-2.5">
+    <div class="flex flex-nowrap rounded-md overflow-hidden cursor-default bg-primary cursor-pointer transition-colors hover:bg-hover active:bg-active" id="start-overlay">
+      <div class="flex items-center px-5 py-1">Start overlay</div>
     </div>
-    <div class="flex flex-col mb-2.5">
-        <div class="flex flex-col flex-nowrap cursor-default">
-            <div class="flex flex-auto justify-center items-center px-5 py-1 bg-primary rounded-t-md">Overlay shortcuts</div>
-            <div class="w-0.5 h-0.5"></div>
-            <div class="flex flex-nowrap">
-                <input class="flex-initial text-center font-['Roboto'] text-base text-text border-0 transition-colors flex items-center w-36 px-5 py-1 bg-primary hover:bg-hover focus:outline-none" id="yomitan-hotkey" type="text" value="">
-                <div class="w-0.5 h-0.5"></div>
-                <div class="flex flex-auto items-center px-5 py-1 bg-primary">Open Yomitan settings</div>
-                <div class="w-0.5 h-0.5"></div>
-                <div class="flex justify-center items-center p-1 cursor-pointer filter-none transition-colors transition-[filter] bg-primary hover:brightness-125 hover:bg-hover" id="open-yomitan">
-                    <img alt="yomitan settings" class="w-6 h-6" src="../yomitan/images/icon32.png"/>
-                </div>
-            </div>
-            <div class="w-0.5 h-0.5"></div>
-            <div class="flex flex-nowrap">
-                <input class="flex-initial text-center font-['Roboto'] text-base text-text border-0 transition-colors flex items-center w-36 px-5 py-1 bg-primary hover:bg-hover focus:outline-none" id="exit-hotkey" type="text" value="">
-                <div class="w-0.5 h-0.5"></div>
-                <div class="flex flex-auto items-center px-5 py-1 bg-primary">Close overlay</div>
-            </div>
-            <div class="w-0.5 h-0.5"></div>
-            <div class="flex flex-col relative">
-                <div class="flex flex-nowrap rounded-b-md overflow-hidden z-10">
-                    <input class="flex-initial text-center font-['Roboto'] text-base text-text border-0 transition-colors flex items-center w-36 px-5 py-1 bg-primary hover:bg-hover disabled:bg-primary disabled:line-through focus:outline-none" id="activation-hotkey" type="text" value="">
-                    <div class="w-0.5 h-0.5"></div>
-                    <div class="flex-initial w-36 flex justify-center items-center px-5 py-1 bg-primary cursor-pointer transition-colors hover:bg-hover active:bg-active" id="activation-type"></div>
-                    <div class="w-0.5 h-0.5"></div>
-                    <div class="flex-auto flex items-center px-5 py-1 bg-primary">to show overlay</div>
-                </div>
-                <div class="absolute w-full">
-                    <div class="relative invisible min-h-6 flex items-center px-5 py-1">i</div>
-                    <div class="relative top-0.5 left-0 flex flex-col py-2.5 rounded-md bg-primary z-20" id="activation-options" style="display: none">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="flex flex-col mb-2.5">
-        <div class="flex flex-nowrap rounded-md overflow-hidden cursor-default bg-primary cursor-pointer transition-colors hover:bg-hover active:bg-active" id="start-overlay">
-            <div class="flex items-center px-5 py-1">Start overlay</div>
-        </div>
-    </div>
+  </div>
 </div>
 <script>
   const activationTypes = [
