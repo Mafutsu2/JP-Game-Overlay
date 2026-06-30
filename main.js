@@ -16,7 +16,7 @@ const start = async () => {
     let yomitanId;
     let win = new BrowserWindow({
       width: 800,
-      height: 600,
+      height: 400,
       resizable: true,
       fullscreen: false,
       show: false,
