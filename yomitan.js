@@ -1,4 +1,5 @@
-import { BrowserWindow } from 'electron';
+import { app, BrowserWindow } from 'electron';
+import path from "path";
 
 let yomitanSettingsWindow = null;
 
@@ -13,6 +14,7 @@ export const openYomitanSettings = (yomitanId) => {
   yomitanSettingsWindow = new BrowserWindow({
     width: 1100,
     height: 600,
+    icon: path.join(app.getAppPath(), 'icons', 'icon.ico'),
     webPreferences: {
       nodeIntegration: true
     }
