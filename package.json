@@ -1,9 +1,9 @@
 {
   "name": "JP-Game-Overlay",
   "version": "1.0.0",
-  "description": "ocr",
+  "author": "Mafutsu",
+  "description": "This app dds an overlay on top any window, allowing you to hover your mouse over any Japanese word to open a dictionary",
   "license": "ISC",
-  "author": "mafutsu",
   "type": "module",
   "main": "main.js",
   "scripts": {

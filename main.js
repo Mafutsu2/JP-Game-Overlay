@@ -1,10 +1,15 @@
 import { app, BrowserWindow, ipcMain } from 'electron';
+import started from 'electron-squirrel-startup';
 import path from 'path';
 import fs from 'fs';
 import { openWindows } from 'get-windows';
 import { openYomitanSettings } from './yomitan.js';
 import overlay from './overlay.js';
 import * as constants from './constants.js';
+
+if (started) {
+  app.quit();
+}
 
 const start = async () => {
   try {
@@ -15,6 +20,7 @@ const start = async () => {
       resizable: true,
       fullscreen: false,
       show: false,
+      icon: path.join(app.getAppPath(), 'icons', 'icon.ico'),
       webPreferences: {
         preload: path.join(app.getAppPath(), 'preload.js'),
       }

@@ -4,13 +4,17 @@ import { FuseV1Options, FuseVersion } from '@electron/fuses';
 export default {
   packagerConfig: {
     asar: true,
-    extraResource: [ 'ocr/dist/ocr.exe', 'yomitan' ]
+    extraResource: [ 'ocr/dist/ocr.exe', 'yomitan' ],
+    icon: './icons/icon',
   },
   rebuildConfig: {},
   makers: [
     {
       name: '@electron-forge/maker-squirrel',
-      config: {},
+      config: {
+        setupIcon: './icons/icon.ico',
+        iconUrl: 'https://raw.githubusercontent.com/Mafutsu2/JP-Game-Overlay/refs/heads/main/icons/icon.ico',
+      },
     },
     {
       name: '@electron-forge/maker-zip',

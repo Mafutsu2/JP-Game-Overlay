@@ -224,6 +224,7 @@ const overlay = (appPath, options, yomitanId, originalWin) => {
     resizable: false,
     fullscreen: false,
     show: false,
+    icon: path.join(appPath, 'icons', 'icon.ico'),
     webPreferences: {
       preload: path.join(appPath, 'preload.js'),
       additionalArguments: [ '' + options.activation ],
