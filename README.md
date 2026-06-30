@@ -6,7 +6,7 @@ dictionary. It only works on Windows for now.
 
 It uses [meikiocr](https://github.com/rtr46/meikiocr) for the text recognition, [Yomitan](https://github.com/yomidevs/yomitan) for the popup definitions and [Glassy](https://github.com/cakiya/yomitan-glass-theme) for the glassy look.
 
-https://github.com/user-attachments/assets/f5138e00-e8bc-4a0d-be28-b0821863a069
+![Main window](https://github.com/user-attachments/assets/f5138e00-e8bc-4a0d-be28-b0821863a069)
 
 https://github.com/user-attachments/assets/db95461b-8dad-41e7-a258-a4ec40b26447
 
@@ -15,7 +15,7 @@ https://github.com/user-attachments/assets/db95461b-8dad-41e7-a258-a4ec40b26447
 1. Download and open the .exe in [releases](https://github.com/Mafutsu2/JP-Game-Overlay/releases).
 2. When the app is installed, go to Yomitan settings by clicking the icon or pressing Alt+Shift+Y and download a dictionary (Jitendex is good).
 
-https://github.com/user-attachments/assets/3ec5cdb8-9644-4128-a000-e0d2bf57ddef
+![Dictionary setting](https://github.com/user-attachments/assets/3ec5cdb8-9644-4128-a000-e0d2bf57ddef)
 
 ## Building from source
 
